@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PawnShop ERP — Complete Pawnshop Management Software</title>
+<meta name="description" content="PawnShop ERP is a complete desktop management system for pawnshop businesses: pledges, interest, cash drawer, reports, auctions and secure Google Drive backups. Bilingual Tamil + English.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --brand:      #2596be;
+    --brand-deep: #14536b;
+    --brand-ink:  #0c2b38;
+    --tint:       #ecf6fa;
+    --tint-line:  #d3e8f1;
+    --gold:       #c9a24b;
+    --gold-soft:  #f6efdd;
+    --paper:      #ffffff;
+    --text:       #24333b;
+    --muted:      #5d707b;
+    --radius:     14px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--text);
+    background:var(--paper);
+    line-height:1.6;
+    font-size:16px;
+  }
+  h1,h2,h3{font-family:'Archivo',sans-serif;line-height:1.15;color:var(--brand-ink)}
+  a{color:var(--brand);text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:3px solid var(--brand);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 24px}
+
+  /* ── Nav ── */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--tint-line);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:66px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:'Archivo';font-weight:800;font-size:1.15rem;color:var(--brand-ink)}
+  .logo-mark{
+    width:34px;height:34px;border-radius:9px;
+    background:linear-gradient(140deg,var(--brand) 55%,var(--brand-deep));
+    display:grid;place-items:center;color:#fff;font-size:1.05rem;font-weight:800;
+  }
+  .nav-links{display:flex;gap:28px;align-items:center;font-weight:500;font-size:.95rem}
+  .nav-links a{color:var(--muted)}
+  .nav-links a:hover{color:var(--brand)}
+  .btn{
+    display:inline-block;background:var(--brand);color:#fff;font-weight:600;
+    padding:11px 22px;border-radius:9px;transition:background .2s;
+  }
+  .btn:hover{background:var(--brand-deep)}
+  .btn-ghost{background:transparent;color:var(--brand);border:1.5px solid var(--brand)}
+  .btn-ghost:hover{background:var(--tint)}
+
+  /* ── Hero ── */
+  .hero{
+    background:
+      radial-gradient(900px 420px at 85% -10%, rgba(37,150,190,.14), transparent 60%),
+      linear-gradient(180deg,#fff 0%,var(--tint) 100%);
+    border-bottom:1px solid var(--tint-line);
+    padding:76px 0 84px;
+  }
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--gold-soft);color:#8a6d2a;border:1px solid #e8dab3;
+    font-size:.8rem;font-weight:600;letter-spacing:.04em;
+    padding:6px 14px;border-radius:100px;margin-bottom:22px;
+  }
+  .hero h1{font-size:clamp(2.1rem,4.4vw,3.15rem);font-weight:800;margin-bottom:18px;letter-spacing:-.01em}
+  .hero h1 em{font-style:normal;color:var(--brand)}
+  .hero p.lead{font-size:1.12rem;color:var(--muted);max-width:34rem;margin-bottom:30px}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-note{margin-top:18px;font-size:.86rem;color:var(--muted)}
+
+  /* Signature: ledger card */
+  .ledger{
+    background:#fff;border:1px solid var(--tint-line);border-radius:var(--radius);
+    box-shadow:0 24px 60px -28px rgba(20,83,107,.35);
+    overflow:hidden;
+  }
+  .ledger-head{
+    background:var(--brand-deep);color:#fff;
+    padding:14px 20px;display:flex;justify-content:space-between;align-items:center;
+    font-family:'Archivo';font-weight:600;font-size:.92rem;letter-spacing:.02em;
+  }
+  .ledger-head span:last-child{font-family:'Inter';font-weight:500;font-size:.8rem;opacity:.75}
+  .ledger-body{padding:8px 20px 18px}
+  .ledger-row{
+    display:flex;justify-content:space-between;align-items:baseline;
+    padding:11px 0;border-bottom:1px dashed var(--tint-line);font-size:.95rem;
+  }
+  .ledger-row:last-child{border-bottom:none}
+  .ledger-row .lbl{color:var(--muted)}
+  .ledger-row .val{font-family:'Archivo';font-weight:700;color:var(--brand-ink);font-variant-numeric:tabular-nums}
+  .ledger-row.ok .val{color:#1b7a4b}
+  .ledger-row.total{
+    border-top:2px solid var(--brand);border-bottom:none;margin-top:4px;padding-top:14px;
+  }
+  .ledger-row.total .lbl{color:var(--brand-ink);font-weight:600}
+  .ledger-chip{
+    display:inline-block;font-size:.72rem;font-weight:600;color:var(--brand-deep);
+    background:var(--tint);border:1px solid var(--tint-line);
+    border-radius:100px;padding:2px 10px;margin-left:8px;vertical-align:middle;
+  }
+
+  /* ── Sections ── */
+  section{padding:78px 0}
+  .sec-head{max-width:44rem;margin-bottom:46px}
+  .sec-head .tag{
+    font-size:.78rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--brand);margin-bottom:12px;display:block;
+  }
+  .sec-head h2{font-size:clamp(1.6rem,3vw,2.15rem);font-weight:800;margin-bottom:12px}
+  .sec-head p{color:var(--muted)}
+
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{
+    background:#fff;border:1px solid var(--tint-line);border-radius:var(--radius);
+    padding:26px;transition:transform .18s,box-shadow .18s;
+  }
+  .card:hover{transform:translateY(-3px);box-shadow:0 16px 36px -20px rgba(20,83,107,.35)}
+  .card .icon{
+    width:44px;height:44px;border-radius:11px;background:var(--tint);
+    display:grid;place-items:center;font-size:1.25rem;margin-bottom:16px;
+  }
+  .card h3{font-size:1.06rem;font-weight:700;margin-bottom:8px}
+  .card p{font-size:.93rem;color:var(--muted)}
+
+  .band{background:var(--tint);border-top:1px solid var(--tint-line);border-bottom:1px solid var(--tint-line)}
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .split ul{list-style:none;margin-top:20px}
+  .split li{
+    display:flex;gap:12px;margin-bottom:14px;font-size:.97rem;
+  }
+  .split li::before{
+    content:"✓";flex:0 0 22px;height:22px;border-radius:50%;
+    background:var(--brand);color:#fff;font-size:.75rem;font-weight:700;
+    display:grid;place-items:center;margin-top:2px;
+  }
+  .shield{
+    background:#fff;border:1px solid var(--tint-line);border-radius:var(--radius);
+    padding:30px;box-shadow:0 18px 44px -26px rgba(20,83,107,.3);
+  }
+  .shield h3{display:flex;align-items:center;gap:10px;font-size:1.05rem;margin-bottom:14px}
+  .shield p{font-size:.92rem;color:var(--muted);margin-bottom:12px}
+  .shield p:last-child{margin-bottom:0}
+
+  /* ── Contact / footer ── */
+  .cta-final{text-align:center}
+  .cta-final .btn{margin-top:8px}
+  footer{
+    background:var(--brand-ink);color:#b9cfd9;padding:44px 0 34px;font-size:.9rem;
+  }
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  .foot a{color:#e6f2f7}
+  .foot a:hover{color:#fff;text-decoration:underline}
+  .foot .logo{color:#fff}
+  .foot .logo-mark{background:linear-gradient(140deg,var(--brand),#3fb3da)}
+
+  @media (max-width:860px){
+    .hero-grid,.split{grid-template-columns:1fr;gap:40px}
+    .features{grid-template-columns:1fr 1fr}
+    .nav-links{display:none}
+  }
+  @media (max-width:560px){
+    .features{grid-template-columns:1fr}
+    section{padding:58px 0}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .card,.card:hover{transition:none;transform:none}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <div class="logo"><span class="logo-mark">₹</span> PawnShop&nbsp;ERP</div>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#features">Features</a>
+      <a href="#security">Backups &amp; Security</a>
+      <a href="#contact">Contact</a>
+      <a href="privacy.html">Privacy</a>
+    </nav>
+    <a class="btn" href="#contact">Request a Demo</a>
+  </div>
+</header>
+
+<main>
+  <!-- ── Hero ── -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow">தமிழ் + English &nbsp;·&nbsp; Built for Indian pawnshops</span>
+        <h1>Run your pawnshop with a ledger that <em>always balances</em>.</h1>
+        <p class="lead">
+          PawnShop ERP manages pledges, interest, payments, cash drawer and auctions
+          in one desktop application — with denomination-level cash tracking and
+          automatic backups, so your books match your drawer every evening.
+        </p>
+        <div class="hero-cta">
+          <a class="btn" href="#contact">Request a Demo</a>
+          <a class="btn btn-ghost" href="#features">See Features</a>
+        </div>
+        <p class="hero-note">Works fully offline · Windows &amp; macOS desktop app</p>
+      </div>
+
+      <div class="ledger" role="img" aria-label="Sample daily cash reconciliation from PawnShop ERP">
+        <div class="ledger-head">
+          <span>Daily Cash Reconciliation</span>
+          <span>Branch Daybook</span>
+        </div>
+        <div class="ledger-body">
+          <div class="ledger-row"><span class="lbl">Opening balance</span><span class="val">₹ 38,521</span></div>
+          <div class="ledger-row"><span class="lbl">Loans issued <span class="ledger-chip">3 pledges</span></span><span class="val">₹ 59,720</span></div>
+          <div class="ledger-row"><span class="lbl">Interest received</span><span class="val">₹ 1,220</span></div>
+          <div class="ledger-row"><span class="lbl">Gold in vault <span class="ledger-chip">22K</span></span><span class="val">193.00 g</span></div>
+          <div class="ledger-row total ok"><span class="lbl">Drawer vs books</span><span class="val">✓ Balanced</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ── -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="tag">Everything in one place</span>
+        <h2>From pledge entry to auction — fully covered</h2>
+        <p>Every module speaks the language of the counter: pockets, receipts, denominations and due dates.</p>
+      </div>
+      <div class="features">
+        <div class="card">
+          <div class="icon">📿</div>
+          <h3>Pledge Management</h3>
+          <p>Create pledges with jewellery photos, purity, weight and value. Pocket numbers and printed receipts included.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🧮</div>
+          <h3>Automatic Interest</h3>
+          <p>Scheme-based interest calculated to the day — including part payments, parked interest and settlements.</p>
+        </div>
+        <div class="card">
+          <div class="icon">💵</div>
+          <h3>Denomination Cash Drawer</h3>
+          <p>Track every ₹500 and ₹10 note. The system knows exactly which notes are in your drawer, not just the total.</p>
+        </div>
+        <div class="card">
+          <div class="icon">📊</div>
+          <h3>Daily &amp; Monthly Reports</h3>
+          <p>Daybook, branch daily report, profit &amp; loss, and metal-weight vault inventory in one click.</p>
+        </div>
+        <div class="card">
+          <div class="icon">🔨</div>
+          <h3>Auctions &amp; Recovery</h3>
+          <p>Move overdue pledges to auction, record recoveries and keep interest income correctly reported.</p>
+        </div>
+        <div class="card">
+          <div class="icon">👥</div>
+          <h3>Owner &amp; Staff Roles</h3>
+          <p>Staff handle daily entries; sensitive actions like backdated payments stay owner-only. Full audit log.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Backups & security ── -->
+  <section id="security" class="band">
+    <div class="wrap split">
+      <div>
+        <div class="sec-head" style="margin-bottom:0">
+          <span class="tag">Your data, protected</span>
+          <h2>Offline-first, backed up automatically</h2>
+        </div>
+        <ul>
+          <li>All business data is stored locally on your own computer — the app works fully offline.</li>
+          <li>Scheduled local backups, plus optional backup to your own Google Drive account.</li>
+          <li>Drive access is limited to backup files the app itself creates — nothing else in your Drive is touched.</li>
+          <li>Sign-in tokens are stored in your operating system's secure keychain, never in plain files.</li>
+        </ul>
+      </div>
+      <div class="shield">
+        <h3>🔐 How Google Drive backup works</h3>
+        <p>When you choose to connect Google Drive, PawnShop ERP asks only for the
+        <strong>drive.file</strong> permission — the narrowest scope Google offers.
+        It can create and manage its own backup files and nothing more.</p>
+        <p>You can disconnect at any time from the app's backup settings, or revoke
+        access from your Google Account permissions page. Read the full details in our
+        <a href="privacy.html">Privacy Policy</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Contact ── -->
+  <section id="contact" class="cta-final">
+    <div class="wrap">
+      <div class="sec-head" style="margin:0 auto 18px;text-align:center">
+        <span class="tag">Get started</span>
+        <h2>See PawnShop ERP running on your counter</h2>
+        <p>Write to us for a demo, pricing, or a trial licence for your shop.</p>
+      </div>
+      <!-- TODO: replace with your real contact email in BOTH places below -->
+      <a class="btn" href="mailto:info@e3ddesign.com">info@e3ddesign.com</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div class="logo"><span class="logo-mark">₹</span> PawnShop&nbsp;ERP</div>
+    <div>
+      <a href="#features">Features</a> &nbsp;·&nbsp;
+      <a href="privacy.html">Privacy Policy</a> &nbsp;·&nbsp;
+      <!-- TODO: replace with your real contact email -->
+      <a href="mailto:info@e3ddesign.com">Contact</a>
+    </div>
+    <div>© 2026 E3D Designs. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
